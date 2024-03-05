@@ -19,9 +19,9 @@ let args = getArgs();
 
   if (expire && expire !== "false") {
     if (/^[\d.]+$/.test(expire)) expire *= 1000;
-	let expireDate = formatTime(expire);
-	let resetDayLeft = getRmainingDays(expire);
-	content.push(`重置：剩余${resetDayLeft}天`);
+    let expireDate = formatTime(expire);
+    let resetDayLeft = getRemainingDays(expire);
+    content.push(`重置：剩余${resetDayLeft}天`);
     content.push(`到期：${expireDate}`);
   }
 
@@ -90,12 +90,14 @@ async function getDataInfo(url) {
   );
 }
 
-function getRmainingDays(expireTime) {
+function getRemainingDays(expireTime) {
   const today = new Date();
   const targetDate = new Date(expireTime);
   const oneDay = 24 * 60 * 60 * 1000; // milliseconds in one day
   const diffDays = Math.round(Math.abs((targetDate - today) / oneDay) - 1);
-  return diffDays % 31;
+  const remainder = diffDays % 31;
+  // If remainder is 0, return 31 instead
+  return remainder === 0 ? 31 : remainder;
 }
 
 function bytesToSize(bytes) {
