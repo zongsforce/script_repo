@@ -111,24 +111,24 @@ function bytesToSize(bytes) {
 function formatTime(time) {
   let dateObj = new Date(time);
   let year = dateObj.getFullYear();
-  let month = String(dateObj.getMonth() + 1).padStart(2, '0');
-  let day = String(dateObj.getDate()).padStart(2, '0');
-  let hour = String(dateObj.getHours()).padStart(2, '0');
-  let minute = String(dateObj.getMinutes()).padStart(2, '0');
-  let second = String(dateObj.getSeconds()).padStart(2, '0');
+  let month = dateObj.getMonth() + 1;
+  let day = dateObj.getDate();
+  let hour = dateObj.getHours();
+  let minute = dateObj.getMinutes();
+  let second = dateObj.getSeconds();
 
-  return `${year}-${month}-${day} ${hour}:${minute}:${second}`;
+  return `${year}年${month}月${day}日${hour}时${minute}分${second}秒`;
 }
 
 function formatRemainingTime(resetDayLeft) {
-  if (n >= 1) {
-    // n大于等于1，直接返回天数
+  if (remainingDays >= 1) {
+    // remainingDays大于等于1，直接返回天数
     return `${n.toFixed(2)}天`;
-  } else if (n * 24 >= 1) {
-    // n小于1但n*24大于等于1，返回小时
-    return `${(n * 24).toFixed(2)}小时`;
+  } else if (remainingDays * 24 >= 1) {
+    // remainingDays小于1但remainingDays*24大于等于1，返回小时
+    return `${(remainingDays * 24).toFixed(2)}小时`;
   } else {
-    // n小于1且n*24小于1，返回分钟
-    return `${(n * 24 * 60).toFixed(2)}分钟`;
+    // remainingDays小于1且remainingDays*24小于1，返回分钟
+    return `${(remainingDays * 24 * 60).toFixed(2)}分钟`;
   }
 }
