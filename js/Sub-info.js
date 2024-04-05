@@ -19,9 +19,9 @@ let args = getArgs();
 
   if (expire && expire !== "false") {
     if (/^[\d.]+$/.test(expire)) expire *= 1000;
+    expire = expire - 28800000;
     let expireDate = formatTime(expire);
     let resetDayLeft = getRemainingDays(expire);
-    content.push(`重置：剩余${expire}天`);
     content.push(`重置：剩余${resetDayLeft}天`);
     content.push(`到期：${expireDate}`);
   }
@@ -95,10 +95,9 @@ function getRemainingDays(expireTime) {
   const today = new Date();
   const targetDate = new Date(expireTime);
   const oneDay = 24 * 60 * 60 * 1000; // milliseconds in one day
-  const diffDays = Math.round(Math.abs((targetDate - today) / oneDay) + 1);
-  const remainder = diffDays % 31;
-  // If remainder is 0, return 31 instead
-  return remainder === 0 ? 31 : remainder;
+  const diffDays = Math.abs((targetDate - today) / oneDay);
+  const remainder = (diffDays % 31).toFixed(2);
+  return remainder;
 }
 
 function bytesToSize(bytes) {
@@ -114,5 +113,7 @@ function formatTime(time) {
   let year = dateObj.getFullYear();
   let month = dateObj.getMonth() + 1;
   let day = dateObj.getDate();
-  return year + "年" + month + "月" + day + "日";
+  let hour = dateObj.getHours();
+  let minute = dateObj.getMinutes();
+  return year + "年" + month + "月" + day + "日 " + hour + "时" + minute + "分";
 }
