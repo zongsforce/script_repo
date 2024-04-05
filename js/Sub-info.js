@@ -21,6 +21,7 @@ let args = getArgs();
     if (/^[\d.]+$/.test(expire)) expire *= 1000;
     let expireDate = formatTime(expire);
     let resetDayLeft = getRemainingDays(expire);
+    content.push(`重置：剩余${expire}天`);
     content.push(`重置：剩余${resetDayLeft}天`);
     content.push(`到期：${expireDate}`);
   }
