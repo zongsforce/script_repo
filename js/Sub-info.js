@@ -22,7 +22,7 @@ let args = getArgs();
     expire = expire - 28800000;
     let expireDate = formatTime(expire);
     let resetDayLeft = getRemainingDays(expire);
-    content.push(`重置：剩余${resetDayLeft}天`);
+    content.push(`重置：剩余formatRemainingTime(resetDayLeft)`);
     content.push(`到期：${expireDate}`);
   }
 
@@ -96,7 +96,7 @@ function getRemainingDays(expireTime) {
   const targetDate = new Date(expireTime);
   const oneDay = 24 * 60 * 60 * 1000; // milliseconds in one day
   const diffDays = Math.abs((targetDate - today) / oneDay);
-  const remainder = (diffDays % 31).toFixed(2);
+  const remainder = (diffDays % 31);
   return remainder;
 }
 
@@ -111,9 +111,24 @@ function bytesToSize(bytes) {
 function formatTime(time) {
   let dateObj = new Date(time);
   let year = dateObj.getFullYear();
-  let month = dateObj.getMonth() + 1;
-  let day = dateObj.getDate();
-  let hour = dateObj.getHours();
-  let minute = dateObj.getMinutes();
-  return year + "年" + month + "月" + day + "日 " + hour + "时" + minute + "分";
+  let month = String(dateObj.getMonth() + 1).padStart(2, '0');
+  let day = String(dateObj.getDate()).padStart(2, '0');
+  let hour = String(dateObj.getHours()).padStart(2, '0');
+  let minute = String(dateObj.getMinutes()).padStart(2, '0');
+  let second = String(dateObj.getSeconds()).padStart(2, '0');
+
+  return `${year}-${month}-${day} ${hour}:${minute}:${second}`;
+}
+
+function formatRemainingTime(resetDayLeft) {
+  if (n >= 1) {
+    // n大于等于1，直接返回天数
+    return `${n.toFixed(2)}天`;
+  } else if (n * 24 >= 1) {
+    // n小于1但n*24大于等于1，返回小时
+    return `${(n * 24).toFixed(2)}小时`;
+  } else {
+    // n小于1且n*24小于1，返回分钟
+    return `${(n * 24 * 60).toFixed(2)}分钟`;
+  }
 }
