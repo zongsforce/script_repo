@@ -94,7 +94,7 @@ function getRemainingDays(expireTime) {
   const today = new Date();
   const targetDate = new Date(expireTime);
   const oneDay = 24 * 60 * 60 * 1000; // milliseconds in one day
-  const diffDays = Math.round(Math.abs((targetDate - today) / oneDay) - 1);
+  const diffDays = Math.round(Math.abs((targetDate - today) / oneDay));
   const remainder = diffDays % 31;
   // If remainder is 0, return 31 instead
   return remainder === 0 ? 31 : remainder;
