@@ -22,7 +22,7 @@ let args = getArgs();
     expire = expire - 28800000;
     let expireDate = formatTime(expire);
     let resetDayLeft = getRemainingDays(expire);
-    content.push(`重置：剩余${formatRemainingTime(resetDayLeft)}`);
+    content.push(`重置：剩余${resetDayLeft}`);
     content.push(`到期：${expireDate}`);
   }
 
