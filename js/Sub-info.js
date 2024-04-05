@@ -115,9 +115,8 @@ function formatTime(time) {
   let day = dateObj.getDate();
   let hour = dateObj.getHours();
   let minute = dateObj.getMinutes();
-  let second = dateObj.getSeconds();
 
-  return `${year}年${month}月${day}日${hour}时${minute}分${second}秒`;
+  return `${year}年${month}月${day}日 ${hour}时${minute}分`;
 }
 
 function formatRemainingTime(resetDayLeft) {
