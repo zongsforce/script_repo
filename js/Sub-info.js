@@ -121,14 +121,14 @@ function formatTime(time) {
 }
 
 function formatRemainingTime(resetDayLeft) {
-  if (remainingDays >= 1) {
-    // remainingDays大于等于1，直接返回天数
-    return `${n.toFixed(2)}天`;
-  } else if (remainingDays * 24 >= 1) {
-    // remainingDays小于1但remainingDays*24大于等于1，返回小时
-    return `${(remainingDays * 24).toFixed(2)}小时`;
+  if (resetDayLeft >= 1) {
+    // resetDayLeft大于等于1，直接返回天数
+    return `${resetDayLeft.toFixed(2)}天`;
+  } else if (resetDayLeft * 24 >= 1) {
+    // resetDayLeft小于1但resetDayLeft*24大于等于1，返回小时
+    return `${(resetDayLeft * 24).toFixed(2)}小时`;
   } else {
-    // remainingDays小于1且remainingDays*24小于1，返回分钟
-    return `${(remainingDays * 24 * 60).toFixed(2)}分钟`;
+    // resetDayLeft小于1且resetDayLeft*24小于1，返回分钟
+    return `${(resetDayLeft * 24 * 60).toFixed(2)}分钟`;
   }
 }
